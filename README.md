@@ -26,16 +26,24 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
-This week I learned about Express which is a framework that sits above Node.js that adds functionality such as routing and middleware support. Routing allows us 
+This week I learned about Express which is a framework that sits above Node.js that adds functionality such as routing and middleware support. Routing allows us to separate our code into smaller components, and middleware allows us to add request handlers and other functions.
 
 
 - [ ] Describe Middleware?
 
-- [ ] Describe a Resource?
+Middleware is an array of functions that get executed in order. These functions include request handlers, error-handling middleware, and any other functions we add to our requests that add functionality.
+
+- [ ] Describe a Resource? 
+
+A resource is data on our API that we want to return. This could be users, posts, and any data inside of those such as userID or post text. 
 
 - [ ] What can the API return to help clients know if a request was successful?
 
+It can return a successful status code such as 200 or 201. 
+
 - [ ] How can we partition our application into sub-applications?
+
+You can use routing to separate your application into multiple files. For example, you can take all of your APIs that end in /api/users and put them in their own file and then connected back to the server.js file. 
 
 ## Project Setup
 
