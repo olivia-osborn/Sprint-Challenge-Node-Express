@@ -39,4 +39,34 @@ router.post("/", async (req, res) => {
     }
 })
 
+router.delete("/:id", async (req, res) => {
+    try {
+        const action = await Actions.remove(req.params.id)
+        if (action) {
+            res.status(200).json({ message: "action has been removed!"})
+        } else {
+            res.status(404).json({ message: "Could not find action with that id"})
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Error deleting the action"})
+    }
+})
+
+router.put("/:id", async (req, res) => {
+    const newAction = req.body
+    if (!newAction.project_id || !newAction.description || !newAction.notes) {
+        res.status(400).json({message: "Please enter a action id, description, and notes!"})
+    } else {
+        try {
+            const action = await Actions.update(req.params.id, newAction)
+            if (action) {
+                res.status(200).json(action)
+            } else {
+                res.status(404).json({ message: "Could not find action with that id"})
+            }
+        } catch (error) {
+            res.status(500).json({ message: "Error updating the action"})
+        }
+    }
+})
 module.exports = router;

@@ -39,4 +39,35 @@ router.post("/", async (req, res) => {
     }
 })
 
+router.delete("/:id", async (req, res) => {
+    try {
+        const project = await Projects.remove(req.params.id)
+        if (project) {
+            res.status(200).json({ message: "project has been removed!"})
+        } else {
+            res.status(404).json({ message: "Could not find project with that id"})
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Error deleting the project"})
+    }
+})
+
+router.put("/:id", async (req, res) => {
+    const newProject = req.body
+    if (!newProject.name || !newProject.description) {
+        res.status(400).json({message: "Please enter both a name and a description!"})
+    } else {
+        try {
+            const project = await Projects.update(req.params.id, newProject)
+            if (project) {
+                res.status(200).json(project)
+            } else {
+                res.status(404).json({ message: "Could not find project with that id"})
+            }
+        } catch (error) {
+            res.status(500).json({ message: "Error updating the project"})
+        }
+    }
+})
+
 module.exports = router;
